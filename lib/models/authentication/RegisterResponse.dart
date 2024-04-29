@@ -1,6 +1,6 @@
 /// success : true
-/// message : "User register successfully"
-/// data : {"firstName":"Vishal","lastName":"Bhimporwala","userName":"VishalBhimpor","email":"vishal1@yopmai.com","_id":"662a507021c63644694b6cb1"}
+/// message : "User login successfully"
+/// data : {"_id":"662f5d91f68a338fb8e2afc5","firstName":"Vishal","lastName":"Bhimporwalav","userName":"VishalBhimporv","email":"vishavl1@yopmai.com","createdAt":"2024-04-29T08:42:57.293Z","updatedAt":"2024-04-29T08:42:57.293Z"}
 
 class RegisterResponse {
   RegisterResponse({
@@ -43,62 +43,80 @@ RegisterResponse copyWith({  bool? success,
 
 }
 
+/// _id : "662f5d91f68a338fb8e2afc5"
 /// firstName : "Vishal"
-/// lastName : "Bhimporwala"
-/// userName : "VishalBhimpor"
-/// email : "vishal1@yopmai.com"
-/// _id : "662a507021c63644694b6cb1"
+/// lastName : "Bhimporwalav"
+/// userName : "VishalBhimporv"
+/// email : "vishavl1@yopmai.com"
+/// createdAt : "2024-04-29T08:42:57.293Z"
+/// updatedAt : "2024-04-29T08:42:57.293Z"
 
 class Data {
   Data({
+      String? id, 
       String? firstName, 
       String? lastName, 
       String? userName, 
       String? email, 
-      String? id,}){
+      String? createdAt, 
+      String? updatedAt,}){
+    _id = id;
     _firstName = firstName;
     _lastName = lastName;
     _userName = userName;
     _email = email;
-    _id = id;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
 }
 
   Data.fromJson(dynamic json) {
+    _id = json['_id'];
     _firstName = json['firstName'];
     _lastName = json['lastName'];
     _userName = json['userName'];
     _email = json['email'];
-    _id = json['_id'];
+    _createdAt = json['createdAt'];
+    _updatedAt = json['updatedAt'];
   }
+  String? _id;
   String? _firstName;
   String? _lastName;
   String? _userName;
   String? _email;
-  String? _id;
-Data copyWith({  String? firstName,
+  String? _createdAt;
+  String? _updatedAt;
+Data copyWith({  String? id,
+  String? firstName,
   String? lastName,
   String? userName,
   String? email,
-  String? id,
-}) => Data(  firstName: firstName ?? _firstName,
+  String? createdAt,
+  String? updatedAt,
+}) => Data(  id: id ?? _id,
+  firstName: firstName ?? _firstName,
   lastName: lastName ?? _lastName,
   userName: userName ?? _userName,
   email: email ?? _email,
-  id: id ?? _id,
+  createdAt: createdAt ?? _createdAt,
+  updatedAt: updatedAt ?? _updatedAt,
 );
+  String? get id => _id;
   String? get firstName => _firstName;
   String? get lastName => _lastName;
   String? get userName => _userName;
   String? get email => _email;
-  String? get id => _id;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['_id'] = _id;
     map['firstName'] = _firstName;
     map['lastName'] = _lastName;
     map['userName'] = _userName;
     map['email'] = _email;
-    map['_id'] = _id;
+    map['createdAt'] = _createdAt;
+    map['updatedAt'] = _updatedAt;
     return map;
   }
 

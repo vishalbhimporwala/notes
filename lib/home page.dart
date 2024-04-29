@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:notes/authentication/login.dart';
+import 'package:notes/models/authentication/RegisterResponse.dart';
+import 'package:notes/session/session_manager.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.registerResponse});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -12,7 +15,7 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final RegisterResponse registerResponse;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -22,6 +25,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    SessionManager().logOutUser();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const LoginScreen()));
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -48,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.registerResponse.data?.firstName ?? ""),
       ),
       body: Container(
         constraints: const BoxConstraints.expand(),

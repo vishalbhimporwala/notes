@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notes/splashscreen.dart';
+import 'package:notes/utils/app_utils.dart';
 
 void main() {
+  AppUtils().printLog("call Main");
   runApp(const MyApp());
 }
 
@@ -11,6 +13,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    AppUtils().printLog("call My App");
     return MaterialApp(
       title: 'Hello Flutter Demo',
       theme: ThemeData(
