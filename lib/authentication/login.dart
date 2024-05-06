@@ -5,6 +5,7 @@ import 'package:notes/authentication/register.dart';
 import 'package:notes/home%20page.dart';
 import 'package:notes/models/authentication/RegisterModel.dart';
 import 'package:notes/models/authentication/RegisterResponse.dart';
+import 'package:notes/repository/ApiInterface.dart';
 import 'package:notes/repository/api_service.dart';
 import 'package:notes/session/session_manager.dart';
 import 'package:notes/utils/app_utils.dart';
@@ -24,17 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   var registerModel = RegisterModel();
 
   Future<RegisterResponse> login(RegisterModel registerModel) async {
-    final logInter = LogInterceptor(
-        logPrint: (Object o) => debugPrint(o.toString()),
-        error: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: true,
-        request: true,
-        requestHeader: true);
-    final Dio dio = Dio(BaseOptions(contentType: "application/json"));
-    dio.interceptors.add(logInter);
-    final client = ApiServices(dio);
+    final client = ApiInterFace().getApiService();
     try {
       final registerResponse = await client.login(registerModel);
       return registerResponse;
