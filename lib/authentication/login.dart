@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/authentication/register.dart';
-import 'package:notes/home%20page.dart';
+import 'package:notes/home_page.dart';
 import 'package:notes/models/authentication/RegisterModel.dart';
 import 'package:notes/models/authentication/RegisterResponse.dart';
 import 'package:notes/repository/ApiInterface.dart';

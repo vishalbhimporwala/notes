@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:notes/models/authentication/RegisterModel.dart';
 import 'package:notes/models/authentication/RegisterResponse.dart';
+import 'package:notes/models/notes/NoteListResponse.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -22,5 +23,11 @@ abstract class ApiServices {
 
   @POST("note/create")
   Future<NoteResponse> addNote(@Body() NoteModel noteModel);
+
+  @POST("note/update")
+  Future<NoteResponse> updateNote(@Body() NoteModel noteModel);
+
+  @GET("note/fetch")
+  Future<NoteListResponse> getAllNotes();
 
 }

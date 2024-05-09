@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/authentication/login.dart';
-import 'package:notes/home%20page.dart';
+import 'package:notes/home_page.dart';
 import 'package:notes/session/session_manager.dart';
 import 'package:notes/utils/app_utils.dart';
 
