@@ -5,6 +5,7 @@ import 'package:notes/models/authentication/RegisterResponse.dart' hide Data;
 import 'package:notes/models/error/ApiError.dart';
 import 'package:notes/models/notes/NoteListResponse.dart';
 import 'package:notes/models/notes/NoteModel.dart';
+import 'package:notes/models/notes/NoteResponse.dart' hide Data;
 import 'package:notes/notes/add_notes.dart';
 import 'package:notes/repository/ApiInterface.dart';
 import 'package:notes/repository/api_service.dart';
@@ -44,6 +45,26 @@ class _MyHomePageState extends State<MyHomePage> {
         allNotes = noteListResponse.data;
         isLoading = false;
       });
+    } on DioException catch (error, s) {
+      setState(() {
+        isLoading = false;
+      });
+      final apiError = ErrorConverter().convert(error.response);
+      return Future.error(apiError);
+    }
+  }
+
+  Future<NoteResponse> deleteNote(String noteId) async {
+    setState(() {
+      isLoading = true;
+    });
+    ApiServices client = ApiInterFace().getApiService();
+    try {
+      NoteResponse noteResponse = await client.deleteNote(noteId);
+      setState(() {
+        isLoading = false;
+      });
+      return noteResponse;
     } on DioException catch (error, s) {
       setState(() {
         isLoading = false;
@@ -114,6 +135,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           var note = allNotes?[index];
                           return ListTile(
                             title: Text(note!.title as String),
+                            onLongPress: () {
+                              String? noteId = note.id;
+                              if (noteId != null) {
+                                deleteNote(noteId).then((noteResponse) {
+                                  if (noteResponse.success == true) {
+                                    loadAllNotes();
+                                  }
+                                });
+                              }
+                            },
                             onTap: () {
                               addNotes(
                                   NoteModel(
@@ -143,8 +174,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               isLoading
                   ? const Dialog(
-                insetPadding: EdgeInsets.all(0),
-                backgroundColor: Colors.transparent,
+                      insetPadding: EdgeInsets.all(0),
+                      backgroundColor: Colors.transparent,
                       child: Align(
                         alignment: Alignment.center,
                         child: SizedBox(

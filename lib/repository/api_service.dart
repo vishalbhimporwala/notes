@@ -12,7 +12,6 @@ part 'api_service.g.dart';
 
 @RestApi(baseUrl: "http://192.168.29.185:3025/api/v1/")
 abstract class ApiServices {
-
   factory ApiServices(Dio dio, {String baseUrl}) = _ApiServices;
 
   @POST("user/register")
@@ -30,4 +29,6 @@ abstract class ApiServices {
   @GET("note/fetch")
   Future<NoteListResponse> getAllNotes();
 
+  @DELETE("note/delete/{noteId}")
+  Future<NoteResponse> deleteNote(@Path('noteId') String noteId);
 }
