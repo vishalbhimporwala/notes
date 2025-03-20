@@ -10,7 +10,7 @@ import '../models/notes/NoteResponse.dart';
 
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: "http://192.168.29.185:3025/api/v1/")
+@RestApi(baseUrl: "http://192.168.29.29:3020/api/v1/")
 abstract class ApiServices {
   factory ApiServices(Dio dio, {String baseUrl}) = _ApiServices;
 
